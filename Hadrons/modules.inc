@@ -15,6 +15,7 @@ modules_cpp =\
   Modules/MContraction/Meson.cpp \
   Modules/MContraction/SigmaToNucleonEye.cpp \
   Modules/MContraction/SigmaToNucleonNonEye.cpp \
+  Modules/MContraction/WardIdentity.cpp \
   Modules/MContraction/WeakEye3pt.cpp \
   Modules/MContraction/WeakMesonDecayKl2.cpp \
   Modules/MContraction/WeakNonEye3pt.cpp \
@@ -31,6 +32,7 @@ modules_cpp =\
   Modules/MGauge/FundtoHirep.cpp \
   Modules/MGauge/GaugeFix.cpp \
   Modules/MGauge/Random.cpp \
+  Modules/MGauge/Rotation.cpp \
   Modules/MGauge/StochEm.cpp \
   Modules/MGauge/StoutSmearing.cpp \
   Modules/MGauge/Unit.cpp \
@@ -81,7 +83,9 @@ modules_cpp =\
   Modules/MSource/Wall.cpp \
   Modules/MSource/Z2.cpp \
   Modules/MUtilities/PrecisionCast.cpp \
-  Modules/MUtilities/RandomVectors.cpp
+  Modules/MUtilities/RandomVectors.cpp \
+  Modules/MUtilities/TestRotation.cpp \
+  Modules/MUtilities/TestSeqConserved.cpp
 
 modules_hpp =\
   Modules/MAction/DWF.hpp \
@@ -100,6 +104,7 @@ modules_hpp =\
   Modules/MContraction/Meson.hpp \
   Modules/MContraction/SigmaToNucleonEye.hpp \
   Modules/MContraction/SigmaToNucleonNonEye.hpp \
+  Modules/MContraction/WardIdentity.hpp \
   Modules/MContraction/WeakEye3pt.hpp \
   Modules/MContraction/WeakMesonDecayKl2.hpp \
   Modules/MContraction/WeakNonEye3pt.hpp \
@@ -117,6 +122,7 @@ modules_hpp =\
   Modules/MGauge/FundtoHirep.hpp \
   Modules/MGauge/GaugeFix.hpp \
   Modules/MGauge/Random.hpp \
+  Modules/MGauge/Rotation.hpp \
   Modules/MGauge/StochEm.hpp \
   Modules/MGauge/StoutSmearing.hpp \
   Modules/MGauge/Unit.hpp \
@@ -170,5 +176,7 @@ modules_hpp =\
   Modules/MSource/Wall.hpp \
   Modules/MSource/Z2.hpp \
   Modules/MUtilities/PrecisionCast.hpp \
-  Modules/MUtilities/RandomVectors.hpp
+  Modules/MUtilities/RandomVectors.hpp \
+  Modules/MUtilities/TestRotation.hpp \
+  Modules/MUtilities/TestSeqConserved.hpp
 

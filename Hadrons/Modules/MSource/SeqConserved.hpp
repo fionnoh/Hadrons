@@ -68,6 +68,7 @@ class SeqConservedPar: Serializable
 public:
     GRID_SERIALIZABLE_CLASS_MEMBERS(SeqConservedPar,
                                     std::string,  q,
+                                    std::string,  qSrc,
                                     std::string,  action,
                                     unsigned int, tA,
                                     unsigned int, tB,
@@ -121,7 +122,7 @@ TSeqConserved<FImpl>::TSeqConserved(const std::string name)
 template <typename FImpl>
 std::vector<std::string> TSeqConserved<FImpl>::getInput(void)
 {
-    std::vector<std::string> in = {par().q, par().action};
+    std::vector<std::string> in = {par().q, par().qSrc, par().action};
     if (!par().photon.empty()) in.push_back(par().photon);
         
     return in;
@@ -171,8 +172,9 @@ void TSeqConserved<FImpl>::execute(void)
     auto &src = envGet(PropagatorField, getName());
     envGetTmp(PropagatorField, src_tmp);
     src_tmp = src;
-    auto &q   = envGet(PropagatorField, par().q);
-    auto &mat = envGet(FMat, par().action);
+    auto &q    = envGet(PropagatorField, par().q);
+    auto &qSrc = envGet(PropagatorField, par().qSrc);
+    auto &mat  = envGet(FMat, par().action);
     envGetTmp(LatticeComplex, latt_compl);
 
     src = Zero();
@@ -215,7 +217,7 @@ void TSeqConserved<FImpl>::execute(void)
             latt_compl = mom_phase;
         } 
 
-    	mat.SeqConservedCurrent(q, src_tmp, par().curr_type, mu, 
+    	mat.SeqConservedCurrent(q, src_tmp, qSrc, par().curr_type, mu, 
                              par().tA, par().tB, latt_compl);
 	src += src_tmp;
 
