@@ -58,6 +58,7 @@ class TestSeqConservedPar: Serializable
 public:
     GRID_SERIALIZABLE_CLASS_MEMBERS(TestSeqConservedPar,
                                     std::string,  q,
+                                    std::string,  qRev,
                                     std::string,  qSrc,
                                     std::string,  qSeq,
                                     std::string,  action,
@@ -103,7 +104,7 @@ TTestSeqConserved<FImpl>::TTestSeqConserved(const std::string name)
 template <typename FImpl>
 std::vector<std::string> TTestSeqConserved<FImpl>::getInput(void)
 {
-    std::vector<std::string> in = {par().q, par().qSrc, par().qSeq, par().action};
+    std::vector<std::string> in = {par().q, par().qRev, par().qSrc, par().qSeq, par().action};
     
     return in;
 }
@@ -137,6 +138,7 @@ void TTestSeqConserved<FImpl>::execute(void)
     // current sink upon contraction. Assume q uses a point source.
 
     auto                  &q    = envGet(PropagatorField, par().q);
+    auto                  &qRev = envGet(PropagatorField, par().qRev);
     auto                  &qSrc = envGet(PropagatorField, par().qSrc);
     auto                  &qSeq = envGet(PropagatorField, par().qSeq);
     auto                  &act  = envGet(FMat, par().action);
@@ -156,7 +158,7 @@ void TTestSeqConserved<FImpl>::execute(void)
     peekSite(qSite, qSeq, siteCoord);
     test_S = trace(qSite*g);
     test_V = trace(qSite*g*Gamma::gmu[par().mu]);
-    act.ContractConservedCurrent(q, q, tmp, qSrc, par().curr, par().mu);
+    act.ContractConservedCurrent(qRev, q, tmp, qSrc, par().curr, par().mu);
     c = trace(tmp*g);
     sliceSum(c, check_buf, Tp);
     check_S = TensorRemove(check_buf[par().t_J]);

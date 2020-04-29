@@ -132,7 +132,7 @@ void TTestRotation<FImpl>::execute(void)
     c = trace(diff);
     sliceSum(c, rot_buf, Tp);
 
-    for (int t = 0; t < 8; ++t)
+    for (int t = 0; t < nt; ++t)
     {
         seq_S = TensorRemove(seq_buf[t]);
         rot_S = TensorRemove(rot_buf[t]);
@@ -150,7 +150,7 @@ void TTestRotation<FImpl>::execute(void)
     sliceSum(c, rot_buf, Tp);
 
 
-    for (int t = 0; t < 8; ++t)
+    for (int t = 0; t < nt; ++t)
     {
         seq_V = TensorRemove(seq_buf[t]);
         rot_V = TensorRemove(rot_buf[t]);
