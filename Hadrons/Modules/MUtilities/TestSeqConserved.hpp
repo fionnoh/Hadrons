@@ -151,6 +151,7 @@ void TTestSeqConserved<FImpl>::execute(void)
     Complex               test_S, test_V, check_S, check_V;
     std::vector<TComplex> check_buf;
     std::vector<int>      siteCoord;
+    int nt = env().getDim(Tp);
 
     envGetTmp(PropagatorField, tmp);
     envGetTmp(LatticeComplex, c);
@@ -163,9 +164,19 @@ void TTestSeqConserved<FImpl>::execute(void)
     sliceSum(c, check_buf, Tp);
     check_S = TensorRemove(check_buf[par().t_J]);
 
+    for(int t = 0; t < nt; t++)
+    {
+        LOG(Message) << std::setprecision(14) << "SV  = " << real(TensorRemove(check_buf[t])) << std::endl;
+    }
+
     c = trace(tmp*g*Gamma::gmu[par().mu]);
     sliceSum(c, check_buf, Tp);
     check_V = TensorRemove(check_buf[par().t_J]);
+
+    for(int t = 0; t < nt; t++)
+    {
+        LOG(Message) << "VV  = " << real(TensorRemove(check_buf[t])) << std::endl;
+    }
 
     LOG(Message) << "Test S  = " << abs(test_S)   << std::endl;
     LOG(Message) << "Test V  = " << abs(test_V) << std::endl;

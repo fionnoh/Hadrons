@@ -215,7 +215,7 @@ void TWardIdentity<FImpl>::execute(void)
         sliceSum(axial_defect, axial_buf, Tp);
         for (int t = 0; t < axial_buf.size(); ++t)
         {
-            LOG(Message) << "t = " << t << ": " 
+            LOG(Message) << std::setprecision(14) << "t = " << t << ": " 
                          << TensorRemove(axial_buf[t]) << std::endl;
         }
     }

@@ -16,8 +16,8 @@ class TestRotationPar: Serializable
 {
 public:
     GRID_SERIALIZABLE_CLASS_MEMBERS(TestRotationPar,
-                                    std::string,  q,
-                                    std::string,  qRot,
+                                    std::string,  qRotP,
+                                    std::string,  qRotM,
                                     std::string,  qSeq,
                                     double,       charge,
                                     std::string,  origin,
@@ -59,7 +59,7 @@ TTestRotation<FImpl>::TTestRotation(const std::string name)
 template <typename FImpl>
 std::vector<std::string> TTestRotation<FImpl>::getInput(void)
 {
-    std::vector<std::string> in = {par().q, par().qRot, par().qSeq};
+    std::vector<std::string> in = {par().qRotP, par().qRotM, par().qSeq};
     
     return in;
 }
@@ -76,7 +76,7 @@ std::vector<std::string> TTestRotation<FImpl>::getOutput(void)
 template <typename FImpl>
 void TTestRotation<FImpl>::setup(void)
 {
-    envTmpLat(PropagatorField, "diff");
+    envTmpLat(PropagatorField, "deriv");
     envTmpLat(LatticeComplex, "c");
 }
 
@@ -84,12 +84,12 @@ void TTestRotation<FImpl>::setup(void)
 template <typename FImpl>
 void TTestRotation<FImpl>::execute(void)
 {
-    auto   &q    = envGet(PropagatorField, par().q);
-    auto   &qRot = envGet(PropagatorField, par().qRot);
-    auto   &qSeq = envGet(PropagatorField, par().qSeq);
-    double charge = par().charge;
+    auto   &qRotP  = envGet(PropagatorField, par().qRotP);
+    auto   &qRotM  = envGet(PropagatorField, par().qRotM);
+    auto   &qSeq   = envGet(PropagatorField, par().qSeq);
+    double charge2 = 2.0*par().charge;
     unsigned int mu = par().mu;
-    Complex mi(0.0,-1.0);
+    Complex i(0.0,1.0);
     int nt = env().getDim(Tp);
 
     SitePropagator        qSite;
@@ -98,7 +98,7 @@ void TTestRotation<FImpl>::execute(void)
     std::vector<TComplex> seq_buf, rot_buf;
 
     LOG(Message) << "Comparing sequential insertion to U(1) rotation for "
-                 << "charge = " << charge
+                 << "charge = " << par().charge
                  << ", mu = " << mu
                  << ", tJ = " << par().tJ << std::endl; 
 
@@ -107,12 +107,12 @@ void TTestRotation<FImpl>::execute(void)
     peekSite(qSite, qSeq, siteCoord);
     seq_S = trace(qSite);
     seq_V = trace(qSite*Gamma::gmu[mu]);
-    LOG(Message) << "Seq S  = " << abs(seq_S) << std::endl;
+    LOG(Message) << std::setprecision(14) << "Seq S  = " << abs(seq_S) << std::endl;
     LOG(Message) << "Seq V  = " << abs(seq_V) << std::endl;
 
-    envGetTmp(PropagatorField, diff);
-    diff = (mi/charge)*(q-qRot);
-    peekSite(qSite, diff, siteCoord);
+    envGetTmp(PropagatorField, deriv);
+    deriv = (i/charge2)*(qRotP - qRotM);
+    peekSite(qSite, deriv, siteCoord);
     rot_S = trace(qSite);
     rot_V = trace(qSite*Gamma::gmu[mu]);
     LOG(Message) << "Rot S  = " << abs(rot_S) << std::endl;
@@ -129,7 +129,7 @@ void TTestRotation<FImpl>::execute(void)
     c = trace(qSeq);
     sliceSum(c, seq_buf, Tp);
 
-    c = trace(diff);
+    c = trace(deriv);
     sliceSum(c, rot_buf, Tp);
 
     for (int t = 0; t < nt; ++t)
@@ -146,7 +146,7 @@ void TTestRotation<FImpl>::execute(void)
     LOG(Message) << "====================================" << std::endl; 
     c = trace(qSeq*Gamma::gmu[mu]);
     sliceSum(c, seq_buf, Tp);
-    c = trace(diff*Gamma::gmu[mu]);
+    c = trace(deriv*Gamma::gmu[mu]);
     sliceSum(c, rot_buf, Tp);
 
 

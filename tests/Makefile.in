@@ -91,7 +91,7 @@ target_triplet = @target@
 EXTRA_PROGRAMS = Test_QED$(EXEEXT) Test_diskvector$(EXEEXT) \
 	Test_distil$(EXEEXT) Test_free_prop$(EXEEXT) \
 	Test_hadrons_meson_3pt$(EXEEXT) Test_hadrons_spectrum$(EXEEXT) \
-	Test_sigma_to_nucleon$(EXEEXT)
+	Test_sigma_to_nucleon$(EXEEXT) Test_U1_transformation$(EXEEXT)
 subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -105,6 +105,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am_Test_QED_OBJECTS = Test_QED.$(OBJEXT)
 Test_QED_OBJECTS = $(am_Test_QED_OBJECTS)
 Test_QED_DEPENDENCIES =
+am_Test_U1_transformation_OBJECTS = Test_U1_transformation.$(OBJEXT)
+Test_U1_transformation_OBJECTS = $(am_Test_U1_transformation_OBJECTS)
+Test_U1_transformation_DEPENDENCIES =
 am_Test_diskvector_OBJECTS = Test_diskvector.$(OBJEXT)
 Test_diskvector_OBJECTS = $(am_Test_diskvector_OBJECTS)
 Test_diskvector_DEPENDENCIES =
@@ -152,14 +155,14 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(Test_QED_SOURCES) $(Test_diskvector_SOURCES) \
-	$(Test_distil_SOURCES) $(Test_free_prop_SOURCES) \
-	$(Test_hadrons_meson_3pt_SOURCES) \
+SOURCES = $(Test_QED_SOURCES) $(Test_U1_transformation_SOURCES) \
+	$(Test_diskvector_SOURCES) $(Test_distil_SOURCES) \
+	$(Test_free_prop_SOURCES) $(Test_hadrons_meson_3pt_SOURCES) \
 	$(Test_hadrons_spectrum_SOURCES) \
 	$(Test_sigma_to_nucleon_SOURCES)
-DIST_SOURCES = $(Test_QED_SOURCES) $(Test_diskvector_SOURCES) \
-	$(Test_distil_SOURCES) $(Test_free_prop_SOURCES) \
-	$(Test_hadrons_meson_3pt_SOURCES) \
+DIST_SOURCES = $(Test_QED_SOURCES) $(Test_U1_transformation_SOURCES) \
+	$(Test_diskvector_SOURCES) $(Test_distil_SOURCES) \
+	$(Test_free_prop_SOURCES) $(Test_hadrons_meson_3pt_SOURCES) \
 	$(Test_hadrons_spectrum_SOURCES) \
 	$(Test_sigma_to_nucleon_SOURCES)
 am__can_run_installinfo = \
@@ -317,6 +320,8 @@ Test_hadrons_spectrum_SOURCES = Test_hadrons_spectrum.cpp
 Test_hadrons_spectrum_LDADD = -lHadrons -lGrid
 Test_sigma_to_nucleon_SOURCES = Test_sigma_to_nucleon.cpp
 Test_sigma_to_nucleon_LDADD = -lHadrons -lGrid
+Test_U1_transformation_SOURCES = Test_U1_transformation.cpp
+Test_U1_transformation_LDADD = -lHadrons -lGrid
 all: all-am
 
 .SUFFIXES:
@@ -355,6 +360,10 @@ Test_QED$(EXEEXT): $(Test_QED_OBJECTS) $(Test_QED_DEPENDENCIES) $(EXTRA_Test_QED
 	@rm -f Test_QED$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(Test_QED_OBJECTS) $(Test_QED_LDADD) $(LIBS)
 
+Test_U1_transformation$(EXEEXT): $(Test_U1_transformation_OBJECTS) $(Test_U1_transformation_DEPENDENCIES) $(EXTRA_Test_U1_transformation_DEPENDENCIES) 
+	@rm -f Test_U1_transformation$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(Test_U1_transformation_OBJECTS) $(Test_U1_transformation_LDADD) $(LIBS)
+
 Test_diskvector$(EXEEXT): $(Test_diskvector_OBJECTS) $(Test_diskvector_DEPENDENCIES) $(EXTRA_Test_diskvector_DEPENDENCIES) 
 	@rm -f Test_diskvector$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(Test_diskvector_OBJECTS) $(Test_diskvector_LDADD) $(LIBS)
@@ -386,6 +395,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Test_QED.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Test_U1_transformation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Test_diskvector.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Test_distil.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Test_free_prop.Po@am__quote@
