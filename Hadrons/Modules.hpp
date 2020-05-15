@@ -28,6 +28,7 @@
 #include <Hadrons/Modules/MFermion/EMLepton.hpp>
 #include <Hadrons/Modules/MFermion/FreeProp.hpp>
 #include <Hadrons/Modules/MFermion/GaugeProp.hpp>
+#include <Hadrons/Modules/MFermion/SeqU1Prop.hpp>
 #include <Hadrons/Modules/MGauge/Electrify.hpp>
 #include <Hadrons/Modules/MGauge/FundtoHirep.hpp>
 #include <Hadrons/Modules/MGauge/GaugeFix.hpp>

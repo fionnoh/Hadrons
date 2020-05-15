@@ -67,7 +67,7 @@ std::vector<std::string> TTestRotation<FImpl>::getInput(void)
 template <typename FImpl>
 std::vector<std::string> TTestRotation<FImpl>::getOutput(void)
 {
-    std::vector<std::string> out = {getName()};
+    std::vector<std::string> out;
     
     return out;
 }
@@ -140,7 +140,8 @@ void TTestRotation<FImpl>::execute(void)
         LOG(Message) << "t = " << t
                      << ", Seq S  = " << abs(seq_S)
                      << ", Rot S = " << abs(rot_S)
-                     << ", diff = " << abs(diff_VS) << std::endl;
+                     << ", diff = " << abs(diff_VS)
+                     << ", diff/seq S = " << abs(diff_VS)/abs(seq_S) << std::endl;
     }
 
     LOG(Message) << "====================================" << std::endl; 
@@ -158,7 +159,8 @@ void TTestRotation<FImpl>::execute(void)
         LOG(Message) << "t = " << t
                      << ", Seq V  = " << abs(seq_V)
                      << ", Rot V = " << abs(rot_V)
-                     << ", diff = " << abs(diff_VS) << std::endl;
+                     << ", diff = " << abs(diff_VS)
+                     << ", diff/seq V = " << abs(diff_VS)/abs(seq_V) << std::endl;
     }
 }
 

@@ -28,6 +28,7 @@ modules_cpp =\
   Modules/MFermion/EMLepton.cpp \
   Modules/MFermion/FreeProp.cpp \
   Modules/MFermion/GaugeProp.cpp \
+  Modules/MFermion/SeqU1Prop.cpp \
   Modules/MGauge/Electrify.cpp \
   Modules/MGauge/FundtoHirep.cpp \
   Modules/MGauge/GaugeFix.cpp \
@@ -118,6 +119,7 @@ modules_hpp =\
   Modules/MFermion/EMLepton.hpp \
   Modules/MFermion/FreeProp.hpp \
   Modules/MFermion/GaugeProp.hpp \
+  Modules/MFermion/SeqU1Prop.hpp \
   Modules/MGauge/Electrify.hpp \
   Modules/MGauge/FundtoHirep.hpp \
   Modules/MGauge/GaugeFix.hpp \
