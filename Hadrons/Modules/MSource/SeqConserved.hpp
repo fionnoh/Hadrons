@@ -68,7 +68,6 @@ class SeqConservedPar: Serializable
 public:
     GRID_SERIALIZABLE_CLASS_MEMBERS(SeqConservedPar,
                                     std::string,  q,
-                                    std::string,  qSrc,
                                     std::string,  action,
                                     std::string,  source,
                                     unsigned int, tA,
@@ -125,11 +124,7 @@ TSeqConserved<FImpl>::TSeqConserved(const std::string name)
 template <typename FImpl>
 std::vector<std::string> TSeqConserved<FImpl>::getInput(void)
 {
-<<<<<<< HEAD
-    std::vector<std::string> in = {par().q, par().qSrc, par().action};
-=======
     std::vector<std::string> in = {par().q, par().action, par().source};
->>>>>>> d0f010d6a56bbe6cc72b5688250293a717c61b36
     if (!par().photon.empty()) in.push_back(par().photon);
         
     return in;
