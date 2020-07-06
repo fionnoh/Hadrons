@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
         // seq sources with conserved vector insertion
         MSource::ZSeqConserved::Par seqPar;
         seqPar.q         = propZero + "_5d";
-        seqPar.qSrc      = "pt";
+        seqPar.source    = "pt";
         seqPar.action    = actionZero;
         seqPar.tA        = tJ;
         seqPar.tB        = tJ;
